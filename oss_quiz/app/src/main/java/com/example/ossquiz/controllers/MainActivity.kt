@@ -7,11 +7,18 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ossquiz.R
 import com.example.ossquiz.models.User
+import kotlinx.android.synthetic.*
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.toolbar.*
+import kotlinx.android.synthetic.main.toolbar.toolbar
 
 class MainActivity : AppCompatActivity() {
     lateinit var _MyUser : User
@@ -24,6 +31,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        configureImageView()
+        configureToolBar()
 
         _Preferences = getPreferences(Context.MODE_PRIVATE)
 
@@ -97,6 +107,37 @@ class MainActivity : AppCompatActivity() {
         btnPlay.setEnabled(true)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.menu_main_search ->{
+                Toast.makeText(this, "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.", Toast.LENGTH_LONG).show()
+                return true
+            }
+            R.id.menu_main_params ->  {
+                Toast.makeText(this, "Il n'y a rien à paramétrer ici, passez votre chemin...", Toast.LENGTH_LONG).show();
+                return true;
+            }
+            else-> return super.onOptionsItemSelected(item);
+        }
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+            menuInflater.inflate(R.menu.menu_activity_main,menu)
+        return true
+    }
+    fun configureToolBar(){
+        setSupportActionBar(toolbar)
+    }
+    fun configureImageView(){
+        imageOSS.setOnClickListener(object :View.OnClickListener{
+            override fun onClick(v: View?) {
+                launchDetailActivity()
+            }
+        })
+    }
+    fun launchDetailActivity(){
+        val _Intent  = Intent(this@MainActivity, DetailActivity::class.java)
+        this.startActivity(_Intent)
+    }
     override fun onStart() {
         super.onStart()
         ChargeUser()

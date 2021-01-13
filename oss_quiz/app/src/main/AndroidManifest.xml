@@ -9,7 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controllers.QuestionActivity"></activity>
+
+        <activity android:name=".controllers.DetailActivity"
+            android:label="Detail"
+            android:parentActivityName=".controllers.MainActivity">
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".controllers.MainActivity"/>
+        </activity>
+        <activity android:name=".controllers.QuestionActivity" />
         <activity android:name=".controllers.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

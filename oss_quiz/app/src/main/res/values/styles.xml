@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -7,4 +7,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:textColorPrimary"> @color/colorAccent</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="Toolbar.TitleText" tools:ignore="ResourceCycle">
+        <item name="android:textSize"> 21sp</item>
+        <item name="android:textStyle"> italic</item>
+    </style>
 </resources>
